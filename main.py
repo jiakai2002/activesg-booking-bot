@@ -27,9 +27,9 @@ driver.get("https://members.myactivesg.com/auth/signinSP")
 WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
     (By.XPATH, "/html/body/div/div/div/div/div[2]/div[2]/div/div/div[2]/div/div/div[1]/div/div/div/button[2]"))).click()
 driver.find_element(
-    By.XPATH, "/html/body/div/div/div/div/div[2]/div[2]/div/div/div[2]/div/div/div[2]/form/div/div[1]/div/input").send_keys("T0220975B")
+    By.XPATH, "/html/body/div/div/div/div/div[2]/div[2]/div/div/div[2]/div/div/div[2]/form/div/div[1]/div/input").send_keys("username")
 driver.find_element(
-    By.XPATH, "/html/body/div/div/div/div/div[2]/div[2]/div/div/div[2]/div/div/div[2]/form/div/div[2]/div/input").send_keys("bitjax-9pocCy-kadbah")
+    By.XPATH, "/html/body/div/div/div/div/div[2]/div[2]/div/div/div[2]/div/div/div[2]/form/div/div[2]/div/input").send_keys("password")
 driver.find_element(
     By.XPATH, "/html/body/div/div/div/div/div[2]/div[2]/div/div/div[2]/div/div/div[2]/form/div/div[3]/button").click()
 WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
