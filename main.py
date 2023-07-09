@@ -1,10 +1,39 @@
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
 from selenium.common.exceptions import ElementNotInteractableException
 import datetime
 import time
+
+# leave window open when done
+options = Options()
+options.add_experimental_option("detach", True)
+driver = uc.Chrome()
+
+# *** SET LOGIN DETAILS HERE ***
+username = "username"
+password = "password"
+
+# *** CUSTOMIZE BOOKING HERE ***
+total_courts = [1, 2, 3, 4, 5, 6, 7, 8]
+courts = [3]
+total_time_slots = ["7am", "8am", "9am", "10am", "11am", "12pm",
+                    "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm"]
+time_slots = ["10am", "11am"]
+# Only badminton @ bedok heartbeat for now
+activity_id = 18
+venue_id = 895
+now = datetime.datetime.now()
+d = datetime.timedelta(days=15)
+time_stamp = int((now + d).timestamp())
+
+# get time_index for xpath in select_bookings
+time_index = []
+for i in time_slots:
+    index = total_time_slots.index(i) + 1
+    time_index.append(index)
 
 
 def select_bookings():
@@ -19,33 +48,6 @@ def select_bookings():
             slot = driver.find_element(By.XPATH, xpath)
             driver.execute_script("arguments[0].click();", slot)
 
-
-# leave window open when done
-options = uc.ChromeOptions()
-# options.set_capability("detach", True)
-driver = uc.Chrome(options=options)
-# *** CUSTOMIZE BOOKING HERE ***
-total_courts = [1, 2, 3, 4, 5, 6, 7, 8]
-courts = [3]
-total_time_slots = ["7am", "8am", "9am", "10am", "11am", "12pm",
-                    "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm"]
-time_slots = ["10am", "11am"]
-# Only badminton @ bedok heartbeat for now
-activity_id = 18
-venue_id = 895
-now = datetime.datetime.now()
-d = datetime.timedelta(days=15)
-time_stamp = int((now + d).timestamp())
-
-# *** SET LOGIN DETAILS HERE ***
-username = "your_username"
-password = "your_password"
-
-# get time_index for xpath in select_bookings
-time_index = []
-for i in time_slots:
-    index = total_time_slots.index(i) + 1
-    time_index.append(index)
 
 # go to bookings
 driver.get("https://members.myactivesg.com/auth/signinSP")
